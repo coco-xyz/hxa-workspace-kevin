@@ -1,0 +1,28 @@
+{
+  "name": "mas-scout",
+  "version": "0.1.0",
+  "description": "MAS 牌照监控与合规销售自动化",
+  "type": "module",
+  "scripts": {
+    "watch": "node src/watcher/index.js",
+    "watch:diff": "node src/watcher/index.js --diff-only",
+    "pipeline": "node src/pipeline.js",
+    "pipeline:all": "node src/pipeline.js --all",
+    "dashboard": "node dashboard/server.js",
+    "test": "node --test src/**/*.test.js",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "playwright-core": "^1.58.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.3",
+    "eslint": "^9.39.3",
+    "globals": "^15.15.0"
+  },
+  "license": "MIT"
+}
