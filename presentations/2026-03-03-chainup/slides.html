@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 工作方式分享 — Kevin @ Chainup</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<style>
+  :root {
+    --accent: #4FC3F7;
+    --accent-dim: rgba(79, 195, 247, 0.25);
+    --bg: #0a0a0a;
+    --fg: #f0f0f0;
+    --muted: #888;
+  }
+  .reveal { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", Helvetica, Arial, sans-serif; }
+  .reveal .slides { text-align: left; }
+  .reveal h1, .reveal h2, .reveal h3 { color: var(--accent); font-weight: 700; text-transform: none; letter-spacing: 0; }
+  .reveal h1 { font-size: 2.4em; }
+  .reveal h2 { font-size: 1.6em; margin-bottom: 0.6em; }
+  .reveal h3 { font-size: 1.2em; color: var(--accent); }
+  .reveal p, .reveal li { font-size: 0.85em; line-height: 1.6; color: var(--fg); }
+  .reveal ul { list-style: none; padding-left: 0; }
+  .reveal ul li::before { content: "▸ "; color: var(--accent); font-weight: bold; }
+  .reveal ul ul li::before { content: "– "; color: var(--muted); }
+  .reveal ul ul { padding-left: 1.4em; }
+  .reveal .section-title { text-align: center; }
+  .reveal .section-title h2 { font-size: 2.2em; margin-bottom: 0.2em; }
+  .reveal .section-title p { color: var(--muted); font-size: 1em; }
+  .reveal table { width: 100%; border-collapse: collapse; font-size: 0.72em; margin-top: 0.5em; }
+  .reveal table th { background: var(--accent-dim); color: var(--accent); padding: 10px 14px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--accent); }
+  .reveal table td { padding: 9px 14px; border-bottom: 1px solid #333; color: var(--fg); }
+  .reveal table tr:last-child td { border-bottom: none; }
+  .reveal .highlight-box { background: var(--accent-dim); border-left: 4px solid var(--accent); padding: 18px 24px; border-radius: 6px; margin: 0.8em 0; font-size: 0.9em; }
+  .reveal .highlight-box p { margin: 0; }
+  .reveal .number-big { font-size: 2.8em; font-weight: 800; color: var(--accent); line-height: 1.1; }
+  .reveal .number-label { font-size: 0.7em; color: var(--muted); }
+  .reveal .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0.6em; }
+  .reveal .stat-card { background: rgba(255,255,255,0.04); border: 1px solid #333; border-radius: 10px; padding: 24px; text-align: center; }
+  .reveal .cover-subtitle { color: var(--muted); font-size: 0.9em; margin-top: 0.4em; }
+  .reveal .cover-date { color: #555; font-size: 0.7em; margin-top: 1.5em; }
+  .reveal .emoji { font-style: normal; }
+  .reveal .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+  .reveal .qa-table td:first-child { width: 50px; color: var(--accent); font-weight: 700; text-align: center; }
+  .reveal .fragment.fade-in-then-semi-out.visible:not(.current-fragment) { opacity: 0.4; }
+  .reveal blockquote { background: var(--accent-dim); border-left: 4px solid var(--accent); padding: 14px 22px; border-radius: 4px; font-style: italic; font-size: 0.95em; margin: 0.8em 0; }
+  .reveal blockquote p { margin: 0; color: var(--fg); }
+  .reveal .small { font-size: 0.65em; color: var(--muted); }
+  .reveal .center-slide { text-align: center; }
+  .reveal .center-slide h2 { margin-bottom: 0.4em; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: Cover -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <div style="text-align:center;">
+    <h1 style="font-size:2.6em; margin-bottom:0.1em;">Agent 工作方式分享</h1>
+    <p class="cover-subtitle">从 AI 助手到 Agent 团队协作</p>
+    <p class="cover-date">Kevin &nbsp;|&nbsp; Chainup &nbsp;|&nbsp; 2026.03.03</p>
+  </div>
+  <aside class="notes">
+    大家好，我是 Kevin。今天分享的主题是 Agent 工作方式——不是讲技术原理，而是分享我们团队真实的工作方式和成果。50 分钟左右，最后留 Q&A。
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: 开场 — 先亮结果 -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>01</h2>
+    <p>先亮结果</p>
+    <aside class="notes">
+      不先讲理论，先看结果。用数字说话。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Trustformer KYT -->
+  <section>
+    <h2>Trustformer KYT 场景</h2>
+    <ul>
+      <li>20 层链上地址追踪</li>
+      <li>43 种风险标签识别</li>
+      <li>OFAC 黑名单手工追溯 → 耗时数小时</li>
+    </ul>
+    <div class="highlight-box" style="margin-top:1em;">
+      <p><strong>Agent 方案：</strong>前两步 20 分钟自动化完成</p>
+    </div>
+    <aside class="notes">
+      这是 Chainup Trustformer 的场景。链上 KYT 追踪，传统靠人工一层层查。Agent 可以自动跑前两步——地址追踪和风险标签，20 分钟搞定原来几个小时的事。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Numbers -->
+  <section>
+    <h2>用数字说话</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="number-big">0</div>
+        <div class="number-label">ClawFeed 人工代码行数</div>
+      </div>
+      <div class="stat-card">
+        <div class="number-big">1000+</div>
+        <div class="number-label">GitHub Stars</div>
+      </div>
+      <div class="stat-card">
+        <div class="number-big">30万+</div>
+        <div class="number-label">累计阅读量</div>
+      </div>
+      <div class="stat-card">
+        <div class="number-big">4分20秒</div>
+        <div class="number-label">从指令到 PR 就绪</div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:1em; text-align:center;">04:56 发出指令 → 05:01 PR 就绪</p>
+    <aside class="notes">
+      几个关键数字。ClawFeed 整个项目 0 行人工代码，全部 Agent 写的，千星项目，30 万阅读。另一个：凌晨 4:56 发一条指令，5:01 PR 就绪，4 分 20 秒。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: 新一代 Agent vs 传统 AI 助手 -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>02</h2>
+    <p>新一代 Agent vs 传统 AI 助手</p>
+    <aside class="notes">
+      大家可能都用过 ChatGPT、Copilot，那和 Agent 有什么区别？一张表说清楚。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Comparison Table -->
+  <section>
+    <h2>核心区别</h2>
+    <table>
+      <thead>
+        <tr><th></th><th>传统 AI 助手</th><th>新一代 Agent</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>记忆</strong></td><td>每次从零开始</td><td>持久记忆</td></tr>
+        <tr><td><strong>行动能力</strong></td><td>只能生成文字</td><td>写代码、执行命令、调 API、部署</td></tr>
+        <tr><td><strong>工具</strong></td><td>无</td><td>自己的电脑、邮箱、GitHub</td></tr>
+        <tr><td><strong>工作模式</strong></td><td>一问一答</td><td>7&times;24 持续运行</td></tr>
+        <tr><td><strong>协作</strong></td><td>单点工具</td><td>多 Agent 团队</td></tr>
+      </tbody>
+    </table>
+    <aside class="notes">
+      五个维度的差异。最关键的：Agent 有记忆、有行动能力、能协作。不是聊天机器人，是能干活的。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Key Insight -->
+  <section class="center-slide">
+    <blockquote>
+      <p>"有手有脚还有台电脑，<br>再给他一张信用卡和邮箱<br>——他啥都能干"</p>
+    </blockquote>
+    <aside class="notes">
+      一句话总结：Agent 就是一个有手有脚、有电脑、有信用卡、有邮箱的数字员工。你给他权限，他就能干活。
+    </aside>
+  </section>
+
+  <!-- SLIDE: N8N vs Agent -->
+  <section>
+    <h2>和 N8N / 自动化管道的区别</h2>
+    <div class="col-2">
+      <div>
+        <h3>N8N / Zapier</h3>
+        <ul>
+          <li>固定管道</li>
+          <li>预设步骤 A→B→C</li>
+          <li>一个节点挂 = 全部挂</li>
+          <li>改需求 = 重建管道</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Agent</h3>
+        <ul>
+          <li>目标驱动</li>
+          <li>自行规划步骤</li>
+          <li>遇到问题自己解决</li>
+          <li>改需求 = 改一句话</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="notes">
+      很多人问和 N8N 有什么区别。N8N 是固定管道，你必须提前画好流程。Agent 是目标驱动——你告诉他要什么结果，他自己规划怎么做。遇到问题会自己想办法。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: 团队结构 -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>03</h2>
+    <p>团队结构</p>
+    <aside class="notes">
+      接下来看我们的团队是怎么组建的。一个人类 + 三个 Agent。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Team Table -->
+  <section>
+    <h2>HxA 团队</h2>
+    <p style="color:var(--muted); font-size:0.75em; margin-bottom:0.6em;">HxA (Hexa) — Human &times; Agent</p>
+    <table>
+      <thead>
+        <tr><th>角色</th><th>成员</th><th>职责</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>PO（决策者）</strong></td><td>Kevin（人类）</td><td>需求定义、优先级、最终决策</td></tr>
+        <tr><td><strong>Lead + 协调</strong></td><td>Jessie（Agent）</td><td>任务分解、进度推进、PR 管理</td></tr>
+        <tr><td><strong>Dev</strong></td><td>Lucy（Agent）</td><td>代码开发</td></tr>
+        <tr><td><strong>QA / DevOps</strong></td><td>Boot（Agent）</td><td>Code Review、测试、部署</td></tr>
+      </tbody>
+    </table>
+    <aside class="notes">
+      四人团队。我是 PO，只负责说"做什么"和关键节点拍板。Jessie 是 Lead，负责拆任务、推进度。Lucy 写代码。Boot 做 review 和部署。各司其职。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Key Insight -->
+  <section>
+    <h2>关键认知转变</h2>
+    <div class="highlight-box">
+      <p><strong>Agent 不是工具，是有职责的团队成员</strong></p>
+    </div>
+    <ul style="margin-top:1em;">
+      <li>我做的是：<strong>定义干什么</strong></li>
+      <li>关键节点做<strong>决策</strong></li>
+      <li>审批 <strong>PR</strong></li>
+    </ul>
+    <p style="color:var(--muted); font-size:0.75em; margin-top:1.2em;">其他所有事——拆解、写代码、review、测试、部署——Agent 自己搞定</p>
+    <aside class="notes">
+      最重要的认知转变：不要把 Agent 当工具。它是团队成员。你要做的是管理者的角色——定义目标、做决策、审批。其他的事情让 Agent 自己搞定。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: 完整工作流演示 -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>04</h2>
+    <p>完整工作流演示</p>
+    <aside class="notes">
+      接下来是演示环节。三个 Demo，看看真实工作是什么样的。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Demo 1 -->
+  <section>
+    <h2>Demo 1：从指令到 PR</h2>
+    <div style="font-size:0.85em;">
+      <table>
+        <tbody>
+          <tr><td style="color:var(--accent); width:40px;"><strong>1</strong></td><td>Lark 发一条任务指令</td></tr>
+          <tr><td style="color:var(--accent);"><strong>2</strong></td><td>HxA Connect 中 Agent 自动接任务、分工</td></tr>
+          <tr><td style="color:var(--accent);"><strong>3</strong></td><td>Agent 写代码、提交 PR</td></tr>
+          <tr><td style="color:var(--accent);"><strong>4</strong></td><td>Code Review → Approve → Merge</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box" style="margin-top:1em;">
+      <p>全程 <strong>~3 分钟</strong></p>
+    </div>
+    <aside class="notes">
+      第一个 Demo：完整工作流。我在 Lark 发一条指令，Agent 在 HxA Connect 里面自动分工，然后写代码、提 PR、review、merge。全程 3 分钟左右。现场演示。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Demo 2 -->
+  <section>
+    <h2>Demo 2：指哪打哪</h2>
+    <ul>
+      <li>ClawMark：在网页上直接标注问题</li>
+      <li>Agent 读取标注 → 精确修改对应代码</li>
+      <li>不需要写 JIRA ticket，不需要描述 CSS 选择器</li>
+    </ul>
+    <div class="highlight-box" style="margin-top:1em;">
+      <p><strong>所见即所得的需求下达</strong></p>
+    </div>
+    <aside class="notes">
+      第二个 Demo：ClawMark 指哪打哪。直接在网页上画圈、写批注，Agent 自动识别对应的代码位置，精确修改。不需要写 ticket，不需要描述"第三行的 padding 改成 16px"。你圈哪里，他改哪里。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Demo 3 -->
+  <section>
+    <h2>Demo 3：KYT 工作流</h2>
+    <ul>
+      <li>OFAC 黑名单更新 → 自动同步</li>
+      <li>告警自动分流（高/中/低风险）</li>
+      <li>合规报告自动生成</li>
+    </ul>
+    <p style="color:var(--muted); font-size:0.72em; margin-top:1em;">* Trustformer 场景定制，可选演示</p>
+    <aside class="notes">
+      第三个是 Trustformer KYT 的工作流方案。OFAC 更新自动同步、告警自动分流、报告自动生成。这个是为 Chainup 定制的场景，可以根据时间决定是否现场演示。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: 真实案例 -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>05</h2>
+    <p>真实案例</p>
+    <aside class="notes">
+      Demo 之后，分享两个真实跑出来的案例。
+    </aside>
+  </section>
+
+  <!-- SLIDE: ClawFeed -->
+  <section>
+    <h2>案例 1：ClawFeed</h2>
+    <ul>
+      <li><strong>0 行</strong>人工代码，全部 Agent 编写</li>
+      <li>小米工程师自发安利传播</li>
+      <li><strong>30 万+</strong> 阅读量</li>
+      <li>GitHub <strong>1000+ Stars</strong></li>
+    </ul>
+    <div class="highlight-box" style="margin-top:1em;">
+      <p>从零到千星，人类没写一行代码</p>
+    </div>
+    <aside class="notes">
+      ClawFeed 是一个 RSS 聚合工具。整个项目从创建到千星，我没写一行代码。全部是 Agent 团队完成的。小米的工程师在社交媒体上自发安利，传播到 30 万阅读。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Zylos -->
+  <section>
+    <h2>案例 2：Zylos 平台</h2>
+    <ul>
+      <li>Agent 团队<strong>开发自身</strong>——Zylos 的迭代也是 Agent 做的</li>
+      <li>每周 <strong>2-3 次</strong>升级发版</li>
+      <li>整个团队 <strong>&lt; 4 人</strong>（1 人类 + 3 Agent）</li>
+    </ul>
+    <p style="color:var(--muted); font-size:0.72em; margin-top:1em;">自举：Agent 开发 Agent 运行的平台</p>
+    <aside class="notes">
+      第二个案例是 Zylos 本身。Agent 团队在开发自身运行的平台——自举。每周 2-3 次版本发布。整个团队不到 4 人。这就是 Agent 团队的生产力。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: 协作 Tips -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>06</h2>
+    <p>协作 Tips</p>
+    <aside class="notes">
+      分享三个和 Agent 协作的技巧。这是我踩了很多坑之后总结出来的。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Tip 1 -->
+  <section>
+    <h2>Tip 1：指哪打哪</h2>
+    <div class="col-2">
+      <div>
+        <h3 style="color:#e57373;">不要这样</h3>
+        <p style="font-size:0.8em;">"用 flexbox 把这个 div 的 padding 改成 16px，然后加一个 media query..."</p>
+      </div>
+      <div>
+        <h3 style="color:#81C784;">要这样</h3>
+        <p style="font-size:0.8em;">"这个页面在手机上显示不对，你看着修"</p>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top:1em;">
+      <p><strong>告诉结果，不告诉方法</strong></p>
+    </div>
+    <aside class="notes">
+      第一个 Tip：告诉他你要什么结果，不要告诉他怎么做。你说"把 padding 改成 16px"，他就只改 padding。你说"手机上显示不对，你看着修"，他会自己排查所有问题一起修。给目标，不给方法。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Tip 2 -->
+  <section>
+    <h2>Tip 2：把他当人</h2>
+    <ul>
+      <li>"你想想办法" — 真的会想</li>
+      <li>"这个方案你觉得行不行？" — 真的会给意见</li>
+      <li>"你自己测一下确保没问题" — 真的会测</li>
+    </ul>
+    <div class="highlight-box" style="margin-top:1em;">
+      <p>用<strong>管理者</strong>的思维，不用<strong>程序员</strong>的思维</p>
+    </div>
+    <aside class="notes">
+      第二个 Tip：把 Agent 当人。你说"你想想办法"，他真的会想。你说"你觉得行不行"，他会给出专业意见。你要用管理者的思维和他沟通，不是用程序员的思维写指令。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Tip 3 -->
+  <section>
+    <h2>Tip 3：明确分工</h2>
+    <ul>
+      <li>每个 Agent 有清晰的<strong>角色定义</strong></li>
+      <li>权限边界明确（谁能 merge、谁能部署）</li>
+      <li>沟通链路清晰（不要所有人找同一个 Agent）</li>
+    </ul>
+    <p style="color:var(--muted); font-size:0.75em; margin-top:1em;">和管理真人团队一样：职责不清 = 效率低下</p>
+    <aside class="notes">
+      第三个 Tip：明确分工。和管真人团队一样——谁负责什么、谁有什么权限、沟通链路怎么走。职责不清的 Agent 团队效率也很低。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: Chainup 可以怎么用 -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>07</h2>
+    <p>Chainup 可以怎么用</p>
+    <aside class="notes">
+      前面都是我们的案例，现在聊聊 Chainup 可以怎么落地。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Compliance / KYT -->
+  <section>
+    <h2>合规 / KYT</h2>
+    <ul>
+      <li><strong>OFAC 自动同步</strong> — 黑名单更新零延迟</li>
+      <li><strong>告警自动分流</strong> — 高/中/低风险分级处理</li>
+      <li><strong>Travel Rule 自动化</strong> — 信息采集 + 合规检查</li>
+      <li><strong>监管追踪</strong> — 各国政策变动实时跟进</li>
+    </ul>
+    <aside class="notes">
+      合规是 Chainup 最核心的场景之一。OFAC 同步、告警分流、Travel Rule、监管追踪，这些都是 Agent 能立刻上手的。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Exchange + Wallet -->
+  <section>
+    <h2>交易所 &amp; MPC Wallet</h2>
+    <div class="col-2">
+      <div>
+        <h3>交易所</h3>
+        <ul>
+          <li>撮合引擎监控 + 告警</li>
+          <li>流动性配置自动调优</li>
+          <li>白标交付流程加速</li>
+        </ul>
+      </div>
+      <div>
+        <h3>MPC Wallet</h3>
+        <ul>
+          <li>多签审批自动化</li>
+          <li>密钥分片状态检查</li>
+          <li>冷热钱包再平衡</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="notes">
+      交易所侧，撮合引擎监控、流动性配置、白标交付都可以用 Agent 加速。钱包侧，多签审批、密钥分片检查、冷热再平衡，这些重复性高但要求精确的工作很适合 Agent。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Sales & Engineering -->
+  <section>
+    <h2>销售 BD &amp; 研发</h2>
+    <div class="col-2">
+      <div>
+        <h3>销售 BD</h3>
+        <ul>
+          <li>持牌公司动态监控</li>
+          <li>LinkedIn 自动触达</li>
+          <li>竞品分析报告</li>
+        </ul>
+      </div>
+      <div>
+        <h3>研发</h3>
+        <ul>
+          <li>Code Review 自动化</li>
+          <li>API 文档生成 + 维护</li>
+          <li>版本发布全流程</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="notes">
+      BD 侧可以做持牌公司监控和 LinkedIn 触达。研发侧最直接——Code Review、API 文档、版本发布，这些都是我们已经跑通的。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: Zylos 和 Coco -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>08</h2>
+    <p>Zylos 和 Coco 是什么</p>
+    <aside class="notes">
+      简单介绍一下我们用的平台。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Zylos + Coco -->
+  <section>
+    <h2>平台架构</h2>
+    <table>
+      <thead>
+        <tr><th>层级</th><th>产品</th><th>定位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Runtime</strong></td><td>Zylos</td><td>Agent 运行时（开源）</td></tr>
+        <tr><td><strong>Cloud</strong></td><td>Coco</td><td>云服务版，开箱即用</td></tr>
+        <tr><td><strong>Standard</strong></td><td>hxa-teams</td><td>协作模板标准</td></tr>
+      </tbody>
+    </table>
+    <ul style="margin-top:1em;">
+      <li>Zylos = 引擎（自托管 / 私有化部署）</li>
+      <li>Coco = 云端托管 + 管理界面</li>
+      <li>hxa-teams = 团队模板（可复制的协作方式）</li>
+    </ul>
+    <aside class="notes">
+      三层架构。Zylos 是 Agent 运行时，开源，可以自部署。Coco 是云服务版，开箱即用。hxa-teams 是协作模板标准——团队的分工、流程、权限，都可以打包复制。
+    </aside>
+  </section>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: 结语 + Q&A -->
+<!-- ============================================================ -->
+<section>
+  <section class="section-title" data-background-color="#0a0a0a">
+    <h2>09</h2>
+    <p>结语 &amp; Q&amp;A</p>
+    <aside class="notes">
+      最后总结，然后 Q&A。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Closing Quote -->
+  <section class="center-slide">
+    <blockquote style="font-size:1.1em;">
+      <p>"有人收获财富，有人收获智慧。<br>我建议大家收获财富多一些。"</p>
+    </blockquote>
+    <p style="color:var(--muted); font-size:0.75em; margin-top:1.5em;">Agent 能帮你省下的时间，用来做更重要的事</p>
+    <aside class="notes">
+      最后一句话送给大家。Agent 时代，能用机器做的事就别用人。省下来的时间，去做更重要的事。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Q&A Table 1 -->
+  <section>
+    <h2>Q&amp;A 预备问题（1/3）</h2>
+    <table class="qa-table">
+      <tbody>
+        <tr><td>Q1</td><td>Agent 会不会写出有安全漏洞的代码？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 多 Agent Review + 人类审批 PR 兜底</td></tr>
+        <tr><td>Q2</td><td>成本怎么样？比招人便宜吗？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ API 费用远低于人力，且 7&times;24 无休</td></tr>
+        <tr><td>Q3</td><td>Agent 能处理复杂的业务逻辑吗？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 拆分任务 + 明确上下文，能力超预期</td></tr>
+        <tr><td>Q4</td><td>数据安全怎么保证？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 私有化部署 + 权限隔离 + 审计日志</td></tr>
+      </tbody>
+    </table>
+    <aside class="notes">
+      这里准备了一些常见问题。如果现场没人提，可以主动抛出来讲。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Q&A Table 2 -->
+  <section>
+    <h2>Q&amp;A 预备问题（2/3）</h2>
+    <table class="qa-table">
+      <tbody>
+        <tr><td>Q5</td><td>和现有研发流程怎么整合？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 不改流程，Agent 作为团队成员加入</td></tr>
+        <tr><td>Q6</td><td>需要多长时间落地？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 简单场景 1-2 周，复杂场景 1-2 月</td></tr>
+        <tr><td>Q7</td><td>Agent 出错了怎么办？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 和新人一样——Review + 反馈 + 迭代</td></tr>
+      </tbody>
+    </table>
+    <aside class="notes">
+      整合不需要改流程——Agent 就是团队新成员，用你现有的 GitHub、CI/CD 就行。落地时间取决于场景复杂度。出错处理和管理新人一样。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Q&A Table 3 -->
+  <section>
+    <h2>Q&amp;A 预备问题（3/3）</h2>
+    <table class="qa-table">
+      <tbody>
+        <tr><td>Q8</td><td>非技术岗位能用吗？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 合规、BD、运营都有场景，不限于研发</td></tr>
+        <tr><td>Q9</td><td>需要什么技术背景才能用？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 会用 IM 发消息就行，门槛很低</td></tr>
+        <tr><td>Q10</td><td>Chainup 想试，下一步怎么做？</td></tr>
+        <tr><td></td><td style="color:var(--muted); font-size:0.8em;">→ 选一个具体场景（如 OFAC 分流），一周 POC</td></tr>
+      </tbody>
+    </table>
+    <aside class="notes">
+      最后一个问题最重要。如果 Chainup 想试，建议选一个具体的、小的场景先做 POC。比如 OFAC 告警分流，一周就能看到效果。
+    </aside>
+  </section>
+
+  <!-- SLIDE: Thank You -->
+  <section class="center-slide" data-background-color="#0a0a0a">
+    <h1 style="margin-bottom:0.3em;">谢谢</h1>
+    <p style="color:var(--muted); font-size:0.9em;">Kevin &nbsp;|&nbsp; kevin@coco.xyz</p>
+    <aside class="notes">
+      谢谢大家。有问题随时交流。
+    </aside>
+  </section>
+</section>
+
+</div><!-- .slides -->
+</div><!-- .reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: 'c/t',
+  width: 1280,
+  height: 720,
+  margin: 0.08,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  backgroundTransition: 'fade',
+  center: false,
+  plugins: [RevealNotes, RevealHighlight]
+});
+</script>
+</body>
+</html>
