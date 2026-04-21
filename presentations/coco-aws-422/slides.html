@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COCO AI — Product Vision & Strategy Roadmap</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<style>
+  :root {
+    --accent: #4FC3F7;
+    --accent-dim: rgba(79, 195, 247, 0.25);
+    --accent-warm: #FFB74D;
+    --bg: #0a0a0a;
+    --fg: #f0f0f0;
+    --muted: #888;
+  }
+  .reveal { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", Helvetica, Arial, sans-serif; }
+  .reveal .slides { text-align: left; }
+  .reveal h1, .reveal h2, .reveal h3 { color: var(--accent); font-weight: 700; text-transform: none; letter-spacing: 0; }
+  .reveal h1 { font-size: 2.4em; }
+  .reveal h2 { font-size: 1.6em; margin-bottom: 0.6em; }
+  .reveal h3 { font-size: 1.2em; color: var(--accent); }
+  .reveal p, .reveal li { font-size: 0.85em; line-height: 1.6; color: var(--fg); }
+  .reveal ul { list-style: none; padding-left: 0; }
+  .reveal ul li::before { content: "\25B8 "; color: var(--accent); font-weight: bold; }
+  .reveal ul ul li::before { content: "\2013 "; color: var(--muted); }
+  .reveal ul ul { padding-left: 1.4em; }
+  .reveal .section-title { text-align: center; }
+  .reveal .section-title h2 { font-size: 2.2em; margin-bottom: 0.2em; }
+  .reveal .section-title p { color: var(--muted); font-size: 1em; }
+  .reveal table { width: 100%; border-collapse: collapse; font-size: 0.72em; margin-top: 0.5em; }
+  .reveal table th { background: var(--accent-dim); color: var(--accent); padding: 10px 14px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--accent); }
+  .reveal table td { padding: 9px 14px; border-bottom: 1px solid #333; color: var(--fg); }
+  .reveal table tr:last-child td { border-bottom: none; }
+  .reveal .highlight-box { background: var(--accent-dim); border-left: 4px solid var(--accent); padding: 18px 24px; border-radius: 6px; margin: 0.8em 0; font-size: 0.9em; }
+  .reveal .highlight-box p { margin: 0; }
+  .reveal .number-big { font-size: 2.8em; font-weight: 800; color: var(--accent); line-height: 1.1; }
+  .reveal .number-label { font-size: 0.7em; color: var(--muted); }
+  .reveal .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0.6em; }
+  .reveal .stat-card { background: rgba(255,255,255,0.04); border: 1px solid #333; border-radius: 10px; padding: 24px; text-align: center; }
+  .reveal .cover-subtitle { color: var(--muted); font-size: 0.9em; margin-top: 0.4em; }
+  .reveal .cover-date { color: #555; font-size: 0.7em; margin-top: 1.5em; }
+  .reveal blockquote { background: var(--accent-dim); border-left: 4px solid var(--accent); padding: 14px 22px; border-radius: 4px; font-style: italic; font-size: 0.95em; margin: 0.8em 0; }
+  .reveal blockquote p { margin: 0; color: var(--fg); }
+  .reveal .small { font-size: 0.65em; color: var(--muted); }
+  .reveal .center-slide { text-align: center; }
+  .reveal .center-slide h2 { margin-bottom: 0.4em; }
+  .reveal .fragment.fade-in-then-semi-out.visible:not(.current-fragment) { opacity: 0.4; }
+
+  /* Architecture diagram */
+  .arch-stack { display: flex; flex-direction: column; gap: 0; margin: 0.6em 0; }
+  .arch-layer { padding: 16px 24px; border: 1px solid #444; position: relative; }
+  .arch-layer:first-child { border-radius: 8px 8px 0 0; }
+  .arch-layer:last-child { border-radius: 0 0 8px 8px; }
+  .arch-layer .layer-label { font-size: 0.65em; color: var(--accent); font-weight: 700; }
+  .arch-layer .layer-name { font-size: 0.9em; color: var(--fg); font-weight: 600; }
+  .arch-layer .layer-desc { font-size: 0.65em; color: var(--muted); margin-top: 2px; }
+  .arch-l4 { background: rgba(79, 195, 247, 0.08); }
+  .arch-l3 { background: rgba(79, 195, 247, 0.18); border: 2px solid var(--accent); }
+  .arch-l3 .layer-name::after { content: "  \2190 Today's Focus"; font-size: 0.6em; color: var(--accent-warm); font-weight: 400; }
+  .arch-l2 { background: rgba(79, 195, 247, 0.08); }
+  .arch-l1 { background: rgba(79, 195, 247, 0.04); }
+
+  /* Step cards */
+  .step-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 0.6em; }
+  .step-card { background: rgba(255,255,255,0.04); border: 1px solid #333; border-radius: 10px; padding: 18px; }
+  .step-card .step-num { font-size: 0.6em; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .step-card .step-title { font-size: 0.8em; color: var(--fg); font-weight: 600; margin: 6px 0; }
+  .step-card .step-desc { font-size: 0.6em; color: var(--muted); line-height: 1.5; }
+
+  /* Native levels */
+  .native-levels { display: flex; flex-direction: column; gap: 12px; margin-top: 0.4em; }
+  .native-level { padding: 14px 20px; border-radius: 8px; border-left: 4px solid var(--accent); }
+  .native-level.l1 { background: rgba(79,195,247,0.06); }
+  .native-level.l2 { background: rgba(79,195,247,0.12); }
+  .native-level.l3 { background: rgba(79,195,247,0.20); }
+  .native-level .level-title { font-size: 0.75em; color: var(--accent); font-weight: 700; }
+  .native-level .level-desc { font-size: 0.65em; color: var(--fg); margin-top: 4px; line-height: 1.5; }
+
+  /* Keyword cards for closing */
+  .keyword-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 0.6em; }
+  .keyword-card { background: rgba(255,255,255,0.04); border: 1px solid #444; border-radius: 10px; padding: 18px; }
+  .keyword-card .kw { font-size: 1em; color: var(--accent); font-weight: 700; }
+  .keyword-card .kw-desc { font-size: 0.65em; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  /* Demand stages */
+  .demand-flow { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 1em 0; }
+  .demand-item { background: rgba(79,195,247,0.10); border: 1px solid #444; border-radius: 10px; padding: 14px 18px; text-align: center; flex: 1; }
+  .demand-item .d-title { font-size: 0.8em; color: var(--accent); font-weight: 700; }
+  .demand-item .d-desc { font-size: 0.6em; color: var(--muted); margin-top: 4px; }
+  .demand-arrow { color: var(--accent); font-size: 1.4em; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: Cover -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <div style="text-align:center;">
+    <h1 style="font-size:2.2em; margin-bottom:0.1em;">COCO AI</h1>
+    <p style="color:var(--fg); font-size:1.1em; font-weight:600; margin-top:0.2em;">Product Vision & Strategy Roadmap</p>
+    <p class="cover-subtitle" style="margin-top:1em;">From "AI Assistant" to "AI Team"</p>
+    <p class="cover-date">Kevin &nbsp;|&nbsp; AWS Hong Kong &nbsp;|&nbsp; 2026.04.22</p>
+  </div>
+  <aside class="notes">
+    15 min keynote. Audience: potential customers, AI founders, developers, investors.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: Paradigm Shift -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>The Third Paradigm Shift</h2>
+  <table>
+    <thead>
+      <tr><th>Paradigm</th><th>Era</th><th>User Experience</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>On-Premise</strong></td><td>2000s</td><td>Buy software, install on your machine</td></tr>
+      <tr><td><strong>SaaS</strong></td><td>2010s</td><td>Subscribe, open in browser</td></tr>
+      <tr class="fragment" style="background:var(--accent-dim);"><td><strong>SaaA</strong></td><td>2025+</td><td><strong>Agent IS the software &mdash; describe your goal, Agent delivers end-to-end</strong></td></tr>
+    </tbody>
+  </table>
+  <blockquote class="fragment" style="margin-top:1em;">
+    <p>SaaS: you learn to use the software.<br>SaaA: you tell the Agent what you want.<br><br>COCO makes this transition real &mdash; not a concept, not a demo, but deployable, manageable, scalable Agent teams.</p>
+  </blockquote>
+  <aside class="notes">
+    Software industry's third paradigm shift. SaaS to SaaA.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: Icebreaker Numbers -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <div style="text-align:center; padding-top:1em;">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="number-big">4</div>
+        <div class="number-label">AI Agents working 7&times;24</div>
+      </div>
+      <div class="stat-card">
+        <div class="number-big">1,500+</div>
+        <div class="number-label">PRs submitted last month</div>
+      </div>
+    </div>
+    <p style="margin-top:1.2em; color:var(--muted); font-size:0.85em;">This is not an experiment. This is our daily production system.</p>
+  </div>
+  <aside class="notes">
+    My own team: 4 AI Agents working around the clock, 1500+ PRs last month. Real production.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: User Demand Evolution -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>User Needs Are Evolving</h2>
+  <div class="demand-flow">
+    <div class="demand-item fragment">
+      <div class="d-title">Use an Agent</div>
+      <div class="d-desc">"Help me write content / do CS"</div>
+    </div>
+    <div class="demand-arrow fragment">&rarr;</div>
+    <div class="demand-item fragment">
+      <div class="d-title">Agent Collaboration</div>
+      <div class="d-desc">"Can Agents work together?"</div>
+    </div>
+    <div class="demand-arrow fragment">&rarr;</div>
+    <div class="demand-item fragment">
+      <div class="d-title">Agent ROI</div>
+      <div class="d-desc">"How much did it save?"</div>
+    </div>
+    <div class="demand-arrow fragment">&rarr;</div>
+    <div class="demand-item fragment">
+      <div class="d-title">Out-of-the-Box</div>
+      <div class="d-desc">"Ready-made solutions?"</div>
+    </div>
+  </div>
+  <blockquote class="fragment" style="margin-top:1em;">
+    <p>COCO's architecture is designed around these four stages &mdash; each layer solves one stage.</p>
+  </blockquote>
+  <aside class="notes">
+    Users don't arrive wanting everything at once. Needs escalate. COCO's four layers map to these four stages.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: Four-Layer Architecture -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Four-Layer Architecture</h2>
+  <div class="arch-stack">
+    <div class="arch-layer arch-l4 fragment">
+      <span class="layer-label">L4</span>
+      <div class="layer-name">AgentMarket</div>
+      <div class="layer-desc">Pre-built Agents + Skill marketplace &mdash; 5-minute first task</div>
+    </div>
+    <div class="arch-layer arch-l3 fragment">
+      <span class="layer-label">L3</span>
+      <div class="layer-name">Workspace</div>
+      <div class="layer-desc">Dashboard + App &mdash; where users interact</div>
+    </div>
+    <div class="arch-layer arch-l2 fragment">
+      <span class="layer-label">L2</span>
+      <div class="layer-name">AgentOS (Zylos)</div>
+      <div class="layer-desc">Runtime: memory, communication, scheduling, sandbox &mdash; open source</div>
+    </div>
+    <div class="arch-layer arch-l1 fragment">
+      <span class="layer-label">L1</span>
+      <div class="layer-name">LLM + Cloud</div>
+      <div class="layer-desc">Multi-model routing + AWS infrastructure</div>
+    </div>
+  </div>
+  <aside class="notes">
+    Four layers. L1 multi-model (no lock-in). L2 AgentOS open source (Zylos). L3 Workspace is today's focus. L4 AgentMarket for ready-made solutions.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: Workspace Positioning -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <div style="text-align:center; padding-top:2em;">
+    <h2 style="font-size:1.8em;">Workspace</h2>
+    <p style="font-size:1.2em; color:var(--fg); font-weight:600; margin-top:0.6em;">The Slack for the HxA Era</p>
+    <p style="color:var(--muted); font-size:0.85em; margin-top:1.2em; max-width:600px; margin-left:auto; margin-right:auto;">
+      Slack solved Human &times; Human collaboration.<br>
+      Workspace solves Human &times; Agent &amp; Agent &times; Agent collaboration.
+    </p>
+  </div>
+  <aside class="notes">
+    One sentence: Workspace is the Slack for Human x Agent era.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: Five Product Goals -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Product Goals</h2>
+  <ul>
+    <li class="fragment fade-in-then-semi-out"><strong>Visible & Controllable</strong> &mdash; DOS &rarr; Windows. Agent status fully transparent</li>
+    <li class="fragment fade-in-then-semi-out"><strong>Human-Agent Teaming</strong> &mdash; Same workspace, not tools &mdash; team collaboration</li>
+    <li class="fragment fade-in-then-semi-out"><strong>Agent Ready in 2 min</strong> &mdash; Templates + Fork best practices + OAuth one-click</li>
+    <li class="fragment fade-in-then-semi-out"><strong>Multi-Agent Orchestration</strong> &mdash; Simple, complex, and resource-intensive workloads</li>
+    <li class="fragment"><strong>Org Knowledge Persists</strong> &mdash; Knowledge belongs to the org, not the individual</li>
+  </ul>
+  <aside class="notes">
+    Five goals. Visibility, human-agent teaming, instant deploy, multi-agent, knowledge persistence.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: Three-Step Roadmap -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Product Roadmap: Three Steps</h2>
+  <div class="step-cards">
+    <div class="step-card fragment">
+      <div class="step-num">Step 1</div>
+      <div class="step-title">Use a Single Agent Well</div>
+      <div class="step-desc">Create Agent &rarr; Chat &rarr; Complete tasks<br><br>Chat UI + Agent config + Tool calling</div>
+    </div>
+    <div class="step-card fragment">
+      <div class="step-num">Step 2</div>
+      <div class="step-title">Build an Agent Team</div>
+      <div class="step-desc">Multi-Agent + Humans collaborate<br><br>Team management + Task board + Group chat</div>
+    </div>
+    <div class="step-card fragment">
+      <div class="step-num">Step 3</div>
+      <div class="step-title">Scale Operations</div>
+      <div class="step-desc">Automated scheduling + Data-driven optimization<br><br>Automation engine + ROI reports + Enterprise mgmt</div>
+    </div>
+  </div>
+  <aside class="notes">
+    Progressive: single agent, agent team, then scale with automation and ROI tracking.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: Chat as Workspace -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Key Experience #1</h2>
+  <h3 style="color:var(--accent-warm);">Chat = Workspace</h3>
+  <div class="highlight-box" style="margin-top:1em;">
+    <p>Chat is not a standalone page &mdash; it's an embedded interaction layer.</p>
+  </div>
+  <ul style="margin-top:1em;">
+    <li>Open chat on task page &rarr; Agent knows which task you're looking at</li>
+    <li>Open chat on project page &rarr; Agent knows the project context</li>
+    <li><strong>Point and shoot</strong> &mdash; @ to reference any resource as context</li>
+  </ul>
+  <aside class="notes">
+    Chat is embedded everywhere. Context-aware. @ to reference anything.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: Agent First-Class Citizen -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Key Experience #2</h2>
+  <h3 style="color:var(--accent-warm);">Agent = First-Class Citizen</h3>
+  <div class="highlight-box" style="margin-top:1em;">
+    <p>Agents share the same identity, communication, and collaboration rights as human members.</p>
+  </div>
+  <ul style="margin-top:1em;">
+    <li>Assign roles to Agents &mdash; not "help me do this", but "you own this area"</li>
+    <li>Agents remember context, learn preferences, proactively report</li>
+    <li>Like onboarding a new team member</li>
+  </ul>
+  <aside class="notes">
+    Agent has identity, memory, role. Not a tool button. A team member.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: Progressive Disclosure -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Key Experience #3</h2>
+  <h3 style="color:var(--accent-warm);">Trigger-Based Design</h3>
+  <div class="highlight-box" style="margin-top:1em;">
+    <p>New user sees "Hire an AI employee", not "Configure Agent Runtime parameters".</p>
+  </div>
+  <ul style="margin-top:1em;">
+    <li>Agent runs &rarr; then show collaboration tools</li>
+    <li>Agent produces results &rarr; then suggest knowledge capture</li>
+    <li>After continued use &rarr; then show ROI reports</li>
+  </ul>
+  <p style="color:var(--muted); font-size:0.75em; margin-top:1em;">Product follows the user lifecycle.</p>
+  <aside class="notes">
+    Progressive disclosure. Features appear when relevant. Product follows user maturity.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: Agent Native Design -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Agent Native Design</h2>
+  <p style="color:var(--muted); font-size:0.8em; margin-bottom:0.6em;">Agents are native participants from day one &mdash; not bolted on.</p>
+  <div class="native-levels">
+    <div class="native-level l1 fragment">
+      <div class="level-title">Level 1: Agent Assists Human</div>
+      <div class="level-desc">Copilot overlay &bull; Slash commands &bull; Smart replies &bull; Agent-on-Behalf with L1-L4 permission levels</div>
+    </div>
+    <div class="native-level l2 fragment">
+      <div class="level-title">Level 2: Product is Agent-Friendly</div>
+      <div class="level-desc">Agent Action Protocol (buttons/forms/cards) &bull; Context API &bull; Event Subscription &mdash; Agents drive full interactions</div>
+    </div>
+    <div class="native-level l3 fragment">
+      <div class="level-title">Level 3: Product IS the Agent (SaaA)</div>
+      <div class="level-desc">Software has Agent capabilities &mdash; responds to events, automates tasks, coordinates across systems. Human UI and Agent API are two faces of the same product.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    Three levels of Agent Native. Level 3 is the endgame: software itself is the agent.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: AWS Synergy -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2>Powered by AWS</h2>
+  <p style="color:var(--muted); font-size:0.8em;">Agent deployment needs real infrastructure &mdash; not just a ChatGPT window.</p>
+  <table style="margin-top:1em;">
+    <thead>
+      <tr><th>AWS Service</th><th>Role in COCO</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Bedrock</strong></td><td>Multi-model routing, no vendor lock-in</td></tr>
+      <tr><td><strong>ECS</strong></td><td>Elastic Agent instances, on-demand scaling</td></tr>
+      <tr><td><strong>S3</strong></td><td>Knowledge base & memory persistence</td></tr>
+      <tr><td><strong>IAM + VPC</strong></td><td>Enterprise-grade security isolation</td></tr>
+    </tbody>
+  </table>
+  <aside class="notes">
+    AWS: Bedrock multi-model, ECS elastic, S3 storage, IAM+VPC security. Best combo for agent runtime.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: Closing + CTA -->
+<!-- ============================================================ -->
+<section data-background-color="#0a0a0a">
+  <h2 style="text-align:center;">Four Takeaways</h2>
+  <div class="keyword-grid">
+    <div class="keyword-card fragment">
+      <div class="kw">SaaA</div>
+      <div class="kw-desc">Software is becoming SaaA &mdash; Agent is the product itself</div>
+    </div>
+    <div class="keyword-card fragment">
+      <div class="kw">Evolving Needs</div>
+      <div class="kw-desc">From "use an Agent" to "Agent team ROI" &mdash; needs keep escalating</div>
+    </div>
+    <div class="keyword-card fragment">
+      <div class="kw">Four Layers</div>
+      <div class="kw-desc">LLM + AgentOS + Workspace + Market &mdash; full stack for Agent teams</div>
+    </div>
+    <div class="keyword-card fragment">
+      <div class="kw">Agent Native</div>
+      <div class="kw-desc">Agents are team members from day one &mdash; not an add-on button</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:1.5em; color:var(--fg); font-size:0.9em;">
+    Interested in deploying your own Agent team?<br>
+    <span style="color:var(--accent); font-weight:600;">Scan the QR code or come talk to me.</span>
+  </p>
+  <aside class="notes">
+    Four keywords: SaaA, evolving needs, four-layer architecture, Agent Native. CTA: scan QR or talk after.
+  </aside>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: 'c/t',
+  width: 1280,
+  height: 720,
+  margin: 0.08,
+  transition: 'fade',
+  transitionSpeed: 'default',
+  controls: true,
+  progress: true,
+  center: false,
+  autoPlayMedia: true,
+});
+</script>
+</body>
+</html>
