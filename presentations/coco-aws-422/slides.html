@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COCO AI — Product Vision & Strategy Roadmap</title>
+<title>COCO AI — 产品愿景与战略规划</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
 <style>
@@ -58,7 +58,7 @@
   .arch-layer .layer-desc { font-size: 0.65em; color: var(--muted); margin-top: 2px; }
   .arch-l4 { background: rgba(79, 195, 247, 0.08); }
   .arch-l3 { background: rgba(79, 195, 247, 0.18); border: 2px solid var(--accent); }
-  .arch-l3 .layer-name::after { content: "  \2190 Today's Focus"; font-size: 0.6em; color: var(--accent-warm); font-weight: 400; }
+  .arch-l3 .layer-name::after { content: "  \2190 \4ECA\5929\91CD\70B9"; font-size: 0.6em; color: var(--accent-warm); font-weight: 400; }
   .arch-l2 { background: rgba(79, 195, 247, 0.08); }
   .arch-l1 { background: rgba(79, 195, 247, 0.04); }
 
@@ -97,327 +97,285 @@
 <div class="slides">
 
 <!-- ============================================================ -->
-<!-- SLIDE 1: Cover -->
+<!-- SLIDE 1: 封面 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
   <div style="text-align:center;">
     <h1 style="font-size:2.2em; margin-bottom:0.1em;">COCO AI</h1>
-    <p style="color:var(--fg); font-size:1.1em; font-weight:600; margin-top:0.2em;">Product Vision & Strategy Roadmap</p>
-    <p class="cover-subtitle" style="margin-top:1em;">From "AI Assistant" to "AI Team"</p>
+    <p style="color:var(--fg); font-size:1.1em; font-weight:600; margin-top:0.2em;">产品愿景与战略规划</p>
+    <p class="cover-subtitle" style="margin-top:1em;">从「AI 助手」到「AI 团队」</p>
     <p class="cover-date">Kevin &nbsp;|&nbsp; AWS Hong Kong &nbsp;|&nbsp; 2026.04.22</p>
   </div>
-  <aside class="notes">
-    15 min keynote. Audience: potential customers, AI founders, developers, investors.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 2: Paradigm Shift -->
+<!-- SLIDE 2: 范式转移 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>The Third Paradigm Shift</h2>
+  <h2>第三次范式转移</h2>
   <table>
     <thead>
-      <tr><th>Paradigm</th><th>Era</th><th>User Experience</th></tr>
+      <tr><th>范式</th><th>时代</th><th>用户体验</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>On-Premise</strong></td><td>2000s</td><td>Buy software, install on your machine</td></tr>
-      <tr><td><strong>SaaS</strong></td><td>2010s</td><td>Subscribe, open in browser</td></tr>
-      <tr class="fragment" style="background:var(--accent-dim);"><td><strong>SaaA</strong></td><td>2025+</td><td><strong>Agent IS the software &mdash; describe your goal, Agent delivers end-to-end</strong></td></tr>
+      <tr><td><strong>On-Premise</strong></td><td>2000s</td><td>买软件，装在自己电脑上</td></tr>
+      <tr><td><strong>SaaS</strong></td><td>2010s</td><td>订阅服务，浏览器打开就用</td></tr>
+      <tr class="fragment" style="background:var(--accent-dim);"><td><strong>SaaA</strong></td><td>2025+</td><td><strong>Agent 就是软件 &mdash; 描述目标，Agent 端到端完成</strong></td></tr>
     </tbody>
   </table>
   <blockquote class="fragment" style="margin-top:1em;">
-    <p>SaaS: you learn to use the software.<br>SaaA: you tell the Agent what you want.<br><br>COCO makes this transition real &mdash; not a concept, not a demo, but deployable, manageable, scalable Agent teams.</p>
+    <p>SaaS 时代，你需要学会用软件。<br>SaaA 时代，你只需要告诉 Agent 你要什么。<br><br>COCO 做的事情，就是让这个转变真正落地 &mdash; 不是概念，不是 demo，是能部署、能管理、能规模化的 Agent 团队。</p>
   </blockquote>
-  <aside class="notes">
-    Software industry's third paradigm shift. SaaS to SaaA.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 3: Icebreaker Numbers -->
+<!-- SLIDE 3: 破冰数字 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
   <div style="text-align:center; padding-top:1em;">
     <div class="stats-grid">
       <div class="stat-card">
         <div class="number-big">4</div>
-        <div class="number-label">AI Agents working 7&times;24</div>
+        <div class="number-label">AI Agent 7&times;24 工作中</div>
       </div>
       <div class="stat-card">
         <div class="number-big">1,500+</div>
-        <div class="number-label">PRs submitted last month</div>
+        <div class="number-label">上月提交的 PR 数</div>
       </div>
     </div>
-    <p style="margin-top:1.2em; color:var(--muted); font-size:0.85em;">This is not an experiment. This is our daily production system.</p>
+    <p style="margin-top:1.2em; color:var(--muted); font-size:0.85em;">这不是实验，是我们每天的生产系统。</p>
   </div>
-  <aside class="notes">
-    My own team: 4 AI Agents working around the clock, 1500+ PRs last month. Real production.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 4: User Demand Evolution -->
+<!-- SLIDE 4: 用户需求的变化 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>User Needs Are Evolving</h2>
+  <h2>用户需求在升级</h2>
   <div class="demand-flow">
     <div class="demand-item fragment">
-      <div class="d-title">Use an Agent</div>
-      <div class="d-desc">"Help me write content / do CS"</div>
+      <div class="d-title">用上 Agent</div>
+      <div class="d-desc">「帮我写内容 / 做客服」</div>
     </div>
     <div class="demand-arrow fragment">&rarr;</div>
     <div class="demand-item fragment">
-      <div class="d-title">Agent Collaboration</div>
-      <div class="d-desc">"Can Agents work together?"</div>
+      <div class="d-title">Agent 协同</div>
+      <div class="d-desc">「能不能让 Agent 互相配合？」</div>
     </div>
     <div class="demand-arrow fragment">&rarr;</div>
     <div class="demand-item fragment">
-      <div class="d-title">Agent ROI</div>
-      <div class="d-desc">"How much did it save?"</div>
+      <div class="d-title">Agent 效能</div>
+      <div class="d-desc">「花了多少钱，省了多少人？」</div>
     </div>
     <div class="demand-arrow fragment">&rarr;</div>
     <div class="demand-item fragment">
-      <div class="d-title">Out-of-the-Box</div>
-      <div class="d-desc">"Ready-made solutions?"</div>
+      <div class="d-title">一步到位</div>
+      <div class="d-desc">「有没有现成的行业方案？」</div>
     </div>
   </div>
   <blockquote class="fragment" style="margin-top:1em;">
-    <p>COCO's architecture is designed around these four stages &mdash; each layer solves one stage.</p>
+    <p>COCO 的产品架构就是按这四个阶段设计的 &mdash; 每一层解决一个阶段的问题。</p>
   </blockquote>
-  <aside class="notes">
-    Users don't arrive wanting everything at once. Needs escalate. COCO's four layers map to these four stages.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 5: Four-Layer Architecture -->
+<!-- SLIDE 5: 四层架构 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Four-Layer Architecture</h2>
+  <h2>四层架构</h2>
   <div class="arch-stack">
     <div class="arch-layer arch-l4 fragment">
       <span class="layer-label">L4</span>
-      <div class="layer-name">AgentMarket</div>
-      <div class="layer-desc">Pre-built Agents + Skill marketplace &mdash; 5-minute first task</div>
+      <div class="layer-name">AgentMarket（预制菜）</div>
+      <div class="layer-desc">预制 Agent + Skill 市场 &mdash; 5 分钟完成第一个任务</div>
     </div>
     <div class="arch-layer arch-l3 fragment">
       <span class="layer-label">L3</span>
-      <div class="layer-name">Workspace</div>
-      <div class="layer-desc">Dashboard + App &mdash; where users interact</div>
+      <div class="layer-name">Workspace（餐厅）</div>
+      <div class="layer-desc">Dashboard + App &mdash; 用户直接使用的产品</div>
     </div>
     <div class="arch-layer arch-l2 fragment">
       <span class="layer-label">L2</span>
-      <div class="layer-name">AgentOS (Zylos)</div>
-      <div class="layer-desc">Runtime: memory, communication, scheduling, sandbox &mdash; open source</div>
+      <div class="layer-name">AgentOS / Zylos（灶）</div>
+      <div class="layer-desc">运行时底座：持久记忆 + 多通道通信 + 任务调度 + 安全沙箱 &mdash; 开源</div>
     </div>
     <div class="arch-layer arch-l1 fragment">
       <span class="layer-label">L1</span>
-      <div class="layer-name">LLM + Cloud</div>
-      <div class="layer-desc">Multi-model routing + AWS infrastructure</div>
+      <div class="layer-name">LLM + Cloud（燃料）</div>
+      <div class="layer-desc">多模型路由 + AWS 云基础设施</div>
     </div>
   </div>
-  <aside class="notes">
-    Four layers. L1 multi-model (no lock-in). L2 AgentOS open source (Zylos). L3 Workspace is today's focus. L4 AgentMarket for ready-made solutions.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 6: Workspace Positioning -->
+<!-- SLIDE 6: Workspace 定位 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
   <div style="text-align:center; padding-top:2em;">
     <h2 style="font-size:1.8em;">Workspace</h2>
-    <p style="font-size:1.2em; color:var(--fg); font-weight:600; margin-top:0.6em;">The Slack for the HxA Era</p>
+    <p style="font-size:1.2em; color:var(--fg); font-weight:600; margin-top:0.6em;">HxA 时代的 Slack</p>
     <p style="color:var(--muted); font-size:0.85em; margin-top:1.2em; max-width:600px; margin-left:auto; margin-right:auto;">
-      Slack solved Human &times; Human collaboration.<br>
-      Workspace solves Human &times; Agent &amp; Agent &times; Agent collaboration.
+      Slack 解决了人与人的协作。<br>
+      Workspace 解决的是人与 Agent、Agent 与 Agent 的协作。
     </p>
   </div>
-  <aside class="notes">
-    One sentence: Workspace is the Slack for Human x Agent era.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 7: Five Product Goals -->
+<!-- SLIDE 7: 五个产品目标 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Product Goals</h2>
+  <h2>产品目标</h2>
   <ul>
-    <li class="fragment fade-in-then-semi-out"><strong>Visible & Controllable</strong> &mdash; DOS &rarr; Windows. Agent status fully transparent</li>
-    <li class="fragment fade-in-then-semi-out"><strong>Human-Agent Teaming</strong> &mdash; Same workspace, not tools &mdash; team collaboration</li>
-    <li class="fragment fade-in-then-semi-out"><strong>Agent Ready in 2 min</strong> &mdash; Templates + Fork best practices + OAuth one-click</li>
-    <li class="fragment fade-in-then-semi-out"><strong>Multi-Agent Orchestration</strong> &mdash; Simple, complex, and resource-intensive workloads</li>
-    <li class="fragment"><strong>Org Knowledge Persists</strong> &mdash; Knowledge belongs to the org, not the individual</li>
+    <li class="fragment fade-in-then-semi-out"><strong>可视化与可控</strong> &mdash; 从 DOS 到 Windows，Agent 状态全程透明，看得见、管得住、量得出</li>
+    <li class="fragment fade-in-then-semi-out"><strong>人机混合协作</strong> &mdash; 人和 Agent 在同一空间协作，不是人用工具，是团队协同</li>
+    <li class="fragment fade-in-then-semi-out"><strong>Agent 即用即战</strong> &mdash; 模板市场 + Fork 最优实践 + OAuth 一键授权，2 分钟从零到能干活</li>
+    <li class="fragment fade-in-then-semi-out"><strong>多 Agent 协同</strong> &mdash; 支撑三种工作负载：简单、复杂、资源密集</li>
+    <li class="fragment"><strong>组织知识沉淀</strong> &mdash; 知识归组织不归个人，Agent 离职不带走经验</li>
   </ul>
-  <aside class="notes">
-    Five goals. Visibility, human-agent teaming, instant deploy, multi-agent, knowledge persistence.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 8: Three-Step Roadmap -->
+<!-- SLIDE 8: 三步走 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Product Roadmap: Three Steps</h2>
+  <h2>产品主线：三步走</h2>
   <div class="step-cards">
     <div class="step-card fragment">
       <div class="step-num">Step 1</div>
-      <div class="step-title">Use a Single Agent Well</div>
-      <div class="step-desc">Create Agent &rarr; Chat &rarr; Complete tasks<br><br>Chat UI + Agent config + Tool calling</div>
+      <div class="step-title">把单个 Agent 用好</div>
+      <div class="step-desc">创建 Agent &rarr; 对话 &rarr; 完成任务<br><br>对话界面 + Agent 配置 + 工具调用</div>
     </div>
     <div class="step-card fragment">
       <div class="step-num">Step 2</div>
-      <div class="step-title">Build an Agent Team</div>
-      <div class="step-desc">Multi-Agent + Humans collaborate<br><br>Team management + Task board + Group chat</div>
+      <div class="step-title">搭建 Agent 团队</div>
+      <div class="step-desc">多 Agent + 人类组队 &rarr; 协作<br><br>团队管理 + 任务看板 + 多 Agent 群聊</div>
     </div>
     <div class="step-card fragment">
       <div class="step-num">Step 3</div>
-      <div class="step-title">Scale Operations</div>
-      <div class="step-desc">Automated scheduling + Data-driven optimization<br><br>Automation engine + ROI reports + Enterprise mgmt</div>
+      <div class="step-title">规模化运营</div>
+      <div class="step-desc">自动化调度 &rarr; 数据驱动优化<br><br>自动化引擎 + ROI 报表 + 企业管理</div>
     </div>
   </div>
-  <aside class="notes">
-    Progressive: single agent, agent team, then scale with automation and ROI tracking.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 9: Chat as Workspace -->
+<!-- SLIDE 9: 对话即工作台 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Key Experience #1</h2>
-  <h3 style="color:var(--accent-warm);">Chat = Workspace</h3>
+  <h2>关键体验 #1</h2>
+  <h3 style="color:var(--accent-warm);">对话即工作台</h3>
   <div class="highlight-box" style="margin-top:1em;">
-    <p>Chat is not a standalone page &mdash; it's an embedded interaction layer.</p>
+    <p>对话不是一个独立的聊天页面，是嵌入式交互层 &mdash; 在任何页面都能唤起。</p>
   </div>
   <ul style="margin-top:1em;">
-    <li>Open chat on task page &rarr; Agent knows which task you're looking at</li>
-    <li>Open chat on project page &rarr; Agent knows the project context</li>
-    <li><strong>Point and shoot</strong> &mdash; @ to reference any resource as context</li>
+    <li>在任务页打开对话 &rarr; Agent 自动知道你在看哪个任务</li>
+    <li>在项目页打开对话 &rarr; Agent 自动知道项目上下文</li>
+    <li><strong>指哪打哪</strong> &mdash; @ 引用任何资源作为上下文</li>
   </ul>
-  <aside class="notes">
-    Chat is embedded everywhere. Context-aware. @ to reference anything.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 10: Agent First-Class Citizen -->
+<!-- SLIDE 10: Agent 一等公民 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Key Experience #2</h2>
-  <h3 style="color:var(--accent-warm);">Agent = First-Class Citizen</h3>
+  <h2>关键体验 #2</h2>
+  <h3 style="color:var(--accent-warm);">Agent 一等公民</h3>
   <div class="highlight-box" style="margin-top:1em;">
-    <p>Agents share the same identity, communication, and collaboration rights as human members.</p>
+    <p>Agent 和人类成员享有同一套身份、通信和协作权利。</p>
   </div>
   <ul style="margin-top:1em;">
-    <li>Assign roles to Agents &mdash; not "help me do this", but "you own this area"</li>
-    <li>Agents remember context, learn preferences, proactively report</li>
-    <li>Like onboarding a new team member</li>
+    <li>给 Agent 分配角色 &mdash; 不是「帮我干活」，是「你负责这块」</li>
+    <li>Agent 记住上下文、学习偏好、主动汇报</li>
+    <li>像带一个新人</li>
   </ul>
-  <aside class="notes">
-    Agent has identity, memory, role. Not a tool button. A team member.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 11: Progressive Disclosure -->
+<!-- SLIDE 11: 触发式设计 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Key Experience #3</h2>
-  <h3 style="color:var(--accent-warm);">Trigger-Based Design</h3>
+  <h2>关键体验 #3</h2>
+  <h3 style="color:var(--accent-warm);">触发式设计</h3>
   <div class="highlight-box" style="margin-top:1em;">
-    <p>New user sees "Hire an AI employee", not "Configure Agent Runtime parameters".</p>
+    <p>新用户进来看到的是「雇一个 AI 员工」，不是「配置 Agent Runtime 参数」。</p>
   </div>
   <ul style="margin-top:1em;">
-    <li>Agent runs &rarr; then show collaboration tools</li>
-    <li>Agent produces results &rarr; then suggest knowledge capture</li>
-    <li>After continued use &rarr; then show ROI reports</li>
+    <li>Agent 跑起来后 &rarr; 才展示协同工具</li>
+    <li>做出成果后 &rarr; 才推知识沉淀</li>
+    <li>用了一阵后 &rarr; 才出 ROI 报告</li>
   </ul>
-  <p style="color:var(--muted); font-size:0.75em; margin-top:1em;">Product follows the user lifecycle.</p>
-  <aside class="notes">
-    Progressive disclosure. Features appear when relevant. Product follows user maturity.
-  </aside>
+  <p style="color:var(--muted); font-size:0.75em; margin-top:1em;">产品跟着用户生命周期走。</p>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 12: Agent Native Design -->
+<!-- SLIDE 12: Agent Native 设计理念 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Agent Native Design</h2>
-  <p style="color:var(--muted); font-size:0.8em; margin-bottom:0.6em;">Agents are native participants from day one &mdash; not bolted on.</p>
+  <h2>Agent Native 设计</h2>
+  <p style="color:var(--muted); font-size:0.8em; margin-bottom:0.6em;">产品从设计之初就把 Agent 当成原生参与者，不是事后集成。</p>
   <div class="native-levels">
     <div class="native-level l1 fragment">
-      <div class="level-title">Level 1: Agent Assists Human</div>
-      <div class="level-desc">Copilot overlay &bull; Slash commands &bull; Smart replies &bull; Agent-on-Behalf with L1-L4 permission levels</div>
+      <div class="level-title">层次一：Agent 辅助人使用产品</div>
+      <div class="level-desc">Copilot 悬浮助手 &bull; Slash Commands &bull; Smart Reply &bull; 操作代理（L1-L4 分级权限）</div>
     </div>
     <div class="native-level l2 fragment">
-      <div class="level-title">Level 2: Product is Agent-Friendly</div>
-      <div class="level-desc">Agent Action Protocol (buttons/forms/cards) &bull; Context API &bull; Event Subscription &mdash; Agents drive full interactions</div>
+      <div class="level-title">层次二：产品对 Agent Friendly</div>
+      <div class="level-desc">Agent Action Protocol（按钮/表单/卡片）&bull; Context API &bull; Event Subscription &mdash; Agent 驱动完整交互</div>
     </div>
     <div class="native-level l3 fragment">
-      <div class="level-title">Level 3: Product IS the Agent (SaaA)</div>
-      <div class="level-desc">Software has Agent capabilities &mdash; responds to events, automates tasks, coordinates across systems. Human UI and Agent API are two faces of the same product.</div>
+      <div class="level-title">层次三：产品本身就是 Agent（SaaA）</div>
+      <div class="level-desc">软件具备 Agent 能力 &mdash; 主动响应事件、自动执行任务、跨系统协调。人类 UI 和 Agent API 是同一产品的两个界面。</div>
     </div>
   </div>
-  <aside class="notes">
-    Three levels of Agent Native. Level 3 is the endgame: software itself is the agent.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 13: AWS Synergy -->
+<!-- SLIDE 13: 与 AWS 协同 -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2>Powered by AWS</h2>
-  <p style="color:var(--muted); font-size:0.8em;">Agent deployment needs real infrastructure &mdash; not just a ChatGPT window.</p>
+  <h2>与 AWS 的协同</h2>
+  <p style="color:var(--muted); font-size:0.8em;">Agent 部署不是跑一个 ChatGPT 窗口 &mdash; 需要完整的基础设施。</p>
   <table style="margin-top:1em;">
     <thead>
-      <tr><th>AWS Service</th><th>Role in COCO</th></tr>
+      <tr><th>AWS 服务</th><th>在 COCO 中的角色</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Bedrock</strong></td><td>Multi-model routing, no vendor lock-in</td></tr>
-      <tr><td><strong>ECS</strong></td><td>Elastic Agent instances, on-demand scaling</td></tr>
-      <tr><td><strong>S3</strong></td><td>Knowledge base & memory persistence</td></tr>
-      <tr><td><strong>IAM + VPC</strong></td><td>Enterprise-grade security isolation</td></tr>
+      <tr><td><strong>Bedrock</strong></td><td>多模型调用，不绑定单一供应商</td></tr>
+      <tr><td><strong>ECS</strong></td><td>Agent 实例弹性伸缩，按需启停</td></tr>
+      <tr><td><strong>S3</strong></td><td>Agent 知识库和记忆的持久存储</td></tr>
+      <tr><td><strong>IAM + VPC</strong></td><td>企业级安全隔离</td></tr>
     </tbody>
   </table>
-  <aside class="notes">
-    AWS: Bedrock multi-model, ECS elastic, S3 storage, IAM+VPC security. Best combo for agent runtime.
-  </aside>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 14: Closing + CTA -->
+<!-- SLIDE 14: 收尾 + CTA -->
 <!-- ============================================================ -->
 <section data-background-color="#0a0a0a">
-  <h2 style="text-align:center;">Four Takeaways</h2>
+  <h2 style="text-align:center;">四个关键词带走</h2>
   <div class="keyword-grid">
     <div class="keyword-card fragment">
       <div class="kw">SaaA</div>
-      <div class="kw-desc">Software is becoming SaaA &mdash; Agent is the product itself</div>
+      <div class="kw-desc">软件正在从 SaaS 变成 SaaA &mdash; Agent 不是功能，是产品本身</div>
     </div>
     <div class="keyword-card fragment">
-      <div class="kw">Evolving Needs</div>
-      <div class="kw-desc">From "use an Agent" to "Agent team ROI" &mdash; needs keep escalating</div>
+      <div class="kw">需求在升级</div>
+      <div class="kw-desc">从「用上一个 Agent」到「要看 ROI」&mdash; 需求在不断迭代，产品必须跟上</div>
     </div>
     <div class="keyword-card fragment">
-      <div class="kw">Four Layers</div>
-      <div class="kw-desc">LLM + AgentOS + Workspace + Market &mdash; full stack for Agent teams</div>
+      <div class="kw">四层架构</div>
+      <div class="kw-desc">LLM + AgentOS + Workspace + Market &mdash; 从模型层到应用层的完整栈</div>
     </div>
     <div class="keyword-card fragment">
       <div class="kw">Agent Native</div>
-      <div class="kw-desc">Agents are team members from day one &mdash; not an add-on button</div>
+      <div class="kw-desc">产品设计从第一天就把 Agent 当人 &mdash; 不是加个 AI 按钮，是让 Agent 成为团队一员</div>
     </div>
   </div>
   <p style="text-align:center; margin-top:1.5em; color:var(--fg); font-size:0.9em;">
-    Interested in deploying your own Agent team?<br>
-    <span style="color:var(--accent); font-weight:600;">Scan the QR code or come talk to me.</span>
+    有兴趣部署自己的 Agent 团队？<br>
+    <span style="color:var(--accent); font-weight:600;">扫最后一页的二维码，或者直接来找我聊。</span>
   </p>
-  <aside class="notes">
-    Four keywords: SaaA, evolving needs, four-layer architecture, Agent Native. CTA: scan QR or talk after.
-  </aside>
 </section>
 
 </div>
