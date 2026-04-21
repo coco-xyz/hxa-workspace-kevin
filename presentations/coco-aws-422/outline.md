@@ -134,9 +134,39 @@
 
 ## 时间分配（15 分钟版）
 
+| 环节 | 时间 |
+|------|------|
+| 开场：范式判断 + 破冰数字 | 2 min |
+| 四层架构全景 + 每层一句话 | 4 min |
+| Workspace 重点展开 | 5 min |
+| AWS 协同 | 2 min |
+| 收尾 + CTA | 2 min |
+| **合计** | **15 min** |
 
 ## Slides 建议
 
+| 页码 | 内容 | 备注 |
+|------|------|------|
+| 1 | 封面：COCO AI — Product Vision & Strategy | COCO logo + AWS co-brand |
+| 2 | 三次范式转移（On-Prem → SaaS → SaaA）| 时间轴可视化 |
+| 3 | 破冰数字：4 Agent + 1500 PR | 大字冲击力 |
+| 4 | 四层架构全景图（L1-L4）| 标注"今天重点：L3" |
+| 5 | 每层一句话：L1 多模型 / L2 AgentOS 开源 / L4 即用市场 | 快速带过 |
+| 6 | Workspace 定位：HxA 时代的 Slack | 核心 slide |
+| 7 | 产品主线三步走表格 | 渐进式 |
+| 8 | 对话即工作台 | 截图/原型图 |
+| 9 | Agent 一等公民 + 触发式设计 | 可合并一页 |
+| 10 | AWS 协同：Bedrock + ECS + S3 + IAM | 四个图标 |
+| 11 | 总结两句话 | |
+| 12 | CTA + 二维码 | COCO 注册 + Zylos GitHub + Kevin 微信 |
 
 ## Q&A 预备
 
+| 问题 | 回答要点 |
+|------|---------|
+| 和 Dify/Coze 的区别？ | 它们是工作流编排（画流程图）；COCO Agent 有记忆、能自主行动、能组团队 |
+| 和 Manus 的区别？ | Manus 是单次任务（关窗口就忘了）；COCO Agent 持久运行、有身份和记忆 |
+| 四层都自己做？ | L2 开源（Zylos），L1 用 Bedrock 不自研模型。核心在 L2+L3 |
+| Agent 安全？ | 沙箱隔离 + 权限分级 + 敏感操作人类审批 + 可私有化部署 |
+| 成本？ | 单 Agent 月均几十到几百美金，按用量弹性计费 |
+| 现在能用吗？ | MVP 已跑通，Q2 推 Workspace + APP |
