@@ -186,7 +186,7 @@
 |---|-------|------|
 | 1 | 封面 | COCO AI — Product Vision & Strategy Roadmap |
 | 2 | 范式表 | On-Premise → SaaS → SaaA |
-| 3 | 破冰数字 | 4 AI Agents, 1500+ PR/月 |
+| 3 | 破冰数字 | Kevin 的 7 AI Agents, 1500+ 任务，500+ PR/月 |
 | 4 | 用户需求四阶段 | 用上 → 协同 → 效能 → 一步到位 |
 | 5 | 四层架构 | 全景图（L1-L4） |
 | 6 | Workspace 定位 | "HxA 时代的 Slack" |
